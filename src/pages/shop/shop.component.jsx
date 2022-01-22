@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import SHOP_DATA from './shop.data.js';
 import CollectionPreview from '../../components/collection-preview/collection-preview.component.jsx';
 
@@ -12,10 +13,14 @@ class ShopPage extends React.Component {
 
     render() {
         const {collections} = this.state;
+        const {params} = this.props.match;
+        console.log(params,this.props.match,this.props.history);
         return (
             <div className='shop-page'>
             {
-                collections.map((collection)=>(
+                collections
+                    .filter((el)=>(params && params.collection ? (params.collection === el.routeName) : el))
+                    .map((collection)=>(
                     <CollectionPreview key={collection.id} {...collection}/>
                 ))
             }
@@ -24,4 +29,4 @@ class ShopPage extends React.Component {
     }
 }
 
-export default ShopPage;
+export default withRouter(ShopPage);
