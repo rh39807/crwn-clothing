@@ -12,7 +12,6 @@ import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 
 import './App.css';
-import { selectCartHidden } from './redux/cart/cart.selectors';
 
 class App extends React.Component {
 
@@ -47,9 +46,8 @@ class App extends React.Component {
         <Header/>
         <Switch>
           <Route exact={true} path='/' component={HomePage}/>
-          <Route exact={true} path='/shop' component={ShopPage}/>
+          <Route path='/shop' component={ShopPage}/>
           <Route exact path='/checkout' component={CheckoutPage}/>
-          <Route path='/shop/:collection' component={ShopPage}/>
           <Route path='/signin' render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<SignInAndSignUpPage/>)} />
         </Switch>
       </div>
